@@ -1,21 +1,29 @@
 #!/bin/bash
 echo "Ce script va mettre a jour python3 vers une version plus récente"
-echo 'Quel est votre version actuel?' 
-echo 'Si vous ne savez pas, arrêter le script et lancer la commande "python3 -V"'
-read anc_version
-echo "L'ancienne version est une derivé de la version ? "${anc_version:0:3} "Y/n"
-read answ
-if [ "$answ" == "y" ] || [ "$answ" == "" ] || [ "$answ" == "Y" ]; then 
-    anc_version=${anc_version:0:3} 
-    echo $anc_version
-else
-    echo "Est-ce un derivé de cette version "${anc_version:0:4} "Y/n"
-    read rep
-    if [ "$rep" == "y" ] || [ "$rep" == "" ] || [ "$rep" == "Y" ]; then
-    anc_version=${anc_version:0:4} 
-    echo $anc_version 
+echo "Recherche de votre ancienne version de python..."
+version_act=$(python3 -V)
+echo "L'ancienne version est une derivé de la version ? "${version_act:7:4} "Y/n"
+read rep1
+if [ "$rep1" == "y" ] || [ "$rep1" == "" ] || [ "$rep1" == "Y" ]; then
+    echo "Parfait"
+else 
+    echo 'Quel est votre version actuel?' 
+    echo 'Si vous ne savez pas, arrêter le script et lancer la commande "python3 -V"'
+    read anc_version
+    echo "L'ancienne version est une derivé de la version ? "${anc_version:0:3} "Y/n"
+    read answ
+    if [ "$answ" == "y" ] || [ "$answ" == "" ] || [ "$answ" == "Y" ]; then 
+        anc_version=${anc_version:0:3} 
+        echo $anc_version
     else
-        echo "relancez le programme!"
+        echo "Est-ce un derivé de cette version "${anc_version:0:4} "Y/n"
+        read rep
+        if [ "$rep" == "y" ] || [ "$rep" == "" ] || [ "$rep" == "Y" ]; then
+        anc_version=${anc_version:0:4} 
+        echo $anc_version 
+        else
+            echo "relancez le programme!"
+        fi
     fi
 fi
 echo "Quel version voulez vous télécharger"
